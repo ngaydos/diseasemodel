@@ -9,7 +9,8 @@ class Person:
 def simulate(people, num_infect):
     '''simulates an infection. Infects one random individual and then has them infect num_infect additional people.
     Then each of those people attempts to infect num_individual random individuals. If those individuals are uninfected
-    then they are each infected and will attempt to infect in the future. If each infected individual has infected others then the simulation ends
+    then they are each infected and will attempt to infect in the future. 
+    If each infected individual has infected others then the simulation ends
     inputs = List of people objects, int
     outputs = Float of ratio of people infected
     '''
