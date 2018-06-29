@@ -11,7 +11,10 @@ def simulate(people, num_infect):
     Then each of those people attempts to infect num_individual random individuals. If those individuals are uninfected
     then they are each infected and will attempt to infect in the future. If each infected individual has infected others then the simulation ends
     '''
-
+    while all_infected(people) == False:
+        for person in people:
+            if person.infected and person.checked == False:
+                infect(person, people, num_infect)
 
 def all_infected(people):
     for person in people:
@@ -21,3 +24,12 @@ def all_infected(people):
             else:
                 return False
     return True
+
+def infect(person, people, num_infect):
+    '''
+    '''
+    to_infect = random.sample(people, num_infect)
+    for i in to_infect:
+        i.infected = True
+    person.checked = True
+    #right now this doesn't remove the infected individual from the possible samples
