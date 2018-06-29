@@ -10,6 +10,8 @@ def simulate(people, num_infect):
     '''simulates an infection. Infects one random individual and then has them infect num_infect additional people.
     Then each of those people attempts to infect num_individual random individuals. If those individuals are uninfected
     then they are each infected and will attempt to infect in the future. If each infected individual has infected others then the simulation ends
+    inputs = List of people objects, int
+    outputs = Float of ratio of people infected
     '''
     random.choice(people).infected = True
     while all_infected(people) == False:
@@ -20,7 +22,10 @@ def simulate(people, num_infect):
     return count_infected/len(people)
 
 def all_infected(people):
-    '''checks to see if all people who are infected have checked'''
+    '''checks to see if all people who are infected have been checked and infected for use in simulate
+    Inputs = list
+    Outputs = Bool
+    '''
     for person in people:
         if person.infected == True:
             if person.checked == True:
