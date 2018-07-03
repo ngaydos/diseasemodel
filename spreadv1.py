@@ -21,6 +21,10 @@ def all_infected(people):
     return True
 
 def simulate(people, num_infect, infection_rate):
+    '''simulates an infection in a group of people. Each person is exposed 1 time to num_infect other people
+    and each person exposed has one chance of catching the disease at a infection_rate chance of exposure.
+    '''
+
     random.choice(people).infected = True
     while all_infected(people) == False:
         for person in people:
@@ -31,7 +35,8 @@ def simulate(people, num_infect, infection_rate):
 
 def infect(person, people, num_infect, infection_rate):
     '''
-    takes a person (assumes they are infected) and infects a num_infect number of people from a list of people
+    takes a person (assumes they are infected) and infects a num_infect number of people from a list of people with an infection_rate chance
+    per person. Once a person has been exposed they are considered immune and can't be infected again.
     inputs: person: A Person object, people: A list of Person objects, num_infect: Int to infect, infection_rate: int between 0 and 100
     outputs: None
     '''
@@ -39,5 +44,6 @@ def infect(person, people, num_infect, infection_rate):
     for i in to_infect:
         if random.randint(1, 100) <= infection_rate:
             i.infected = True
+            i.exposed = True
     person.checked = True
     #right now this doesn't remove the infected individual from the possible samples
