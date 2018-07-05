@@ -36,5 +36,5 @@ if __name__ == '__main__':
         grid.all_move()
         xplaces.append(people[0].xloc)
         yplaces.append(people[0].yloc)
-    plt.plot(xplaces, yplaces)
+    plt.scatter(xplaces, yplaces)
     plt.show()
