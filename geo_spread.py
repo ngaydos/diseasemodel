@@ -1,4 +1,5 @@
 import random
+import matplotlib.pyplot as plt
 
 class Grid:
 
@@ -16,3 +17,24 @@ class Grid:
                 person.xloc += xmove
             if person.yloc + ymove <= yarea[1] and person.yloc + ymove >= xarea[0]:
                 person.yloc += ymove
+
+
+class Person:
+
+    def __init__(self, xloc, yloc, infected = False):
+        self.xloc = xloc
+        self.yloc = yloc
+        self.infected = infected
+
+
+if __name__ = '__main__':
+    people = Person(random.randint(20), random.randint(20))
+    grid = Grid(20, 20 people)
+    xplaces = [people[0].xloc]
+    yplaces = [people[0].yloc]
+    for i in range(5):
+        grid.all_move()
+        xplaces.append(people[0].xloc)
+        yplaces.append(people[0].yloc)
+    plt.plot(xplaces, yplaces)
+    plt.show()
