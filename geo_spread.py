@@ -27,9 +27,9 @@ class Person:
         self.infected = infected
 
 
-if __name__ = '__main__':
-    people = Person(random.randint(20), random.randint(20))
-    grid = Grid(20, 20 people)
+if __name__ == '__main__':
+    people = [Person(random.randint(0, 20), random.randint(0, 20))]
+    grid = Grid(20, 20, people)
     xplaces = [people[0].xloc]
     yplaces = [people[0].yloc]
     for i in range(5):
