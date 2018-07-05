@@ -13,9 +13,9 @@ class Grid:
         for person in self.people:
             xmove = random.randint(-1, 1)
             ymove = random.randint(-1, 1)
-            if person.xloc + xmove <= xarea[1] and person.xloc + xmove >= xarea[0]:
+            if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
                 person.xloc += xmove
-            if person.yloc + ymove <= yarea[1] and person.yloc + ymove >= xarea[0]:
+            if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                 person.yloc += ymove
 
 
