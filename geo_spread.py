@@ -1,5 +1,6 @@
 import random
 import matplotlib.pyplot as plt
+import math
 
 class Grid:
 
@@ -18,6 +19,8 @@ class Grid:
             if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                 person.yloc += ymove
 
+    def people_distance(person1, person2):
+        return math.sqrt(((person1.xloc - person2.xloc) ** 2 ) + ((person1.yloc + person2.yloc) **2))
 
 class Person:
 
@@ -25,6 +28,7 @@ class Person:
         self.xloc = xloc
         self.yloc = yloc
         self.infected = infected
+
 
 
 if __name__ == '__main__':
