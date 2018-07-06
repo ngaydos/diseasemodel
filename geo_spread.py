@@ -30,6 +30,8 @@ class Person:
         self.infected = infected
 
 
+    def distance_from(self, other):
+        return math.sqrt(((self.xloc - other.xloc) ** 2 ) + ((self.yloc + other.yloc) **2))
 
 if __name__ == '__main__':
     people = [Person(random.randint(0, 20), random.randint(0, 20))]
