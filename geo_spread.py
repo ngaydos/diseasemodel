@@ -19,9 +19,6 @@ class Grid:
             if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                 person.yloc += ymove
 
-    def people_distance(person1, person2):
-        return math.sqrt(((person1.xloc - person2.xloc) ** 2 ) + ((person1.yloc + person2.yloc) **2))
-
 class Person:
 
     def __init__(self, xloc, yloc, infected = False):
@@ -31,7 +28,7 @@ class Person:
 
 
     def distance_from(self, other):
-        return math.sqrt(((self.xloc - other.xloc) ** 2 ) + ((self.yloc + other.yloc) **2))
+        return math.sqrt(((self.xloc - other.xloc) ** 2 ) + ((self.yloc - other.yloc) **2))
 
 if __name__ == '__main__':
     people = [Person(random.randint(0, 20), random.randint(0, 20))]
