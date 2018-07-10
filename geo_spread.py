@@ -49,8 +49,9 @@ class Grid:
             else:
                 non_infected_x.append(person.xloc)
                 non_infected_y.append(person.yloc)
-        plt.plot(infected_x, infected_y, color = 'r')
-        plt.plot(non_infected_x, non_infected_y, color = 'b') 
+        plt.plot(infected_x, infected_y, 'ro')
+        plt.plot(non_infected_x, non_infected_y, 'bo')
+        plt.show()
 
 
 class Person:
