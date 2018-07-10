@@ -37,7 +37,7 @@ class Grid:
                         non_infected_person.infected = True
         return(sum(person.infected for person in self.people))
 
-    def plot_all():
+    def plot_all(self):
         infected_x = []
         infected_y = []
         non_infected_x = []
