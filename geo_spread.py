@@ -37,6 +37,21 @@ class Grid:
                         non_infected_person.infected = True
         return(sum(person.infected for person in self.people))
 
+    def plot_all():
+        infected_x = []
+        infected_y = []
+        non_infected_x = []
+        non_infected_y = []
+        for person in people:
+            if person.infected == True:
+                infected_x.append(person.xloc)
+                infected_y.append(person.yloc)
+            else:
+                non_infected_x.append(person.xloc)
+                non_infected_y.append(person.yloc)
+        plt.plot(infected_x, infected_y, color = 'r')
+        plt.plot(non_infected_x, non_infected_y, color = 'b') 
+
 
 class Person:
 
@@ -55,3 +70,4 @@ if __name__ == '__main__':
         people.append(Person(random.randint(0, 20), random.randint(0, 20)))
     grid = Grid(20, 20, people)
     print(grid.simulate(1, 10))
+    grid.plot_all()
