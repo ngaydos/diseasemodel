@@ -65,6 +65,12 @@ class Person:
     def distance_from(self, other):
         return math.sqrt(((self.xloc - other.xloc) ** 2 ) + ((self.yloc - other.yloc) **2))
 
+class Hospital:
+
+    def __init__(self, xloc, yloc):
+        self.xloc = xloc
+        self.yloc = yloc
+
 if __name__ == '__main__':
     people = []
     for i in range(50):
