@@ -19,7 +19,7 @@ class Grid:
             if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                 person.yloc += ymove
 
-    def simulate(self, infection_range, generation_count, movement_distance = 1):
+    def simulate(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
         random.choice(self.people).infected = True
         for i in range(generation_count):
             infected_people = []
@@ -34,7 +34,8 @@ class Grid:
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
                     if infected_person.distance_from(non_infected_person) <= infection_range:
-                        non_infected_person.infected = True
+                        if random.randint(1, 100) <= infection_rate:
+                            non_infected_person.infected = True
         return(sum(person.infected for person in self.people))
 
     def plot_all(self):
