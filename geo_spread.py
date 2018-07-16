@@ -9,6 +9,15 @@ class Grid:
         self.yarea = [0, ysize]
         self.people = people
 
+    def split_people(self):
+        uninfected_people = []
+        infected_people = []
+        for person in self.people:
+            if person.infected == True:
+                infected_people.append(person)
+            else:
+                uninfected_people.append(person)
+        return uninfected_people, infected_people
 
     def random_move(self):
         for person in self.people:
@@ -18,6 +27,10 @@ class Grid:
                 person.xloc += xmove
             if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                 person.yloc += ymove
+
+    def zombie_move(self):
+        for person in self.people:
+
 
     def simulate_random(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
         random.choice(self.people).infected = True
