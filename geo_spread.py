@@ -74,10 +74,11 @@ class Grid:
 
 class Person:
 
-    def __init__(self, xloc, yloc, infected = False):
+    def __init__(self, xloc, yloc, infected = False, exposed = False):
         self.xloc = xloc
         self.yloc = yloc
         self.infected = infected
+        self.exposed = exposed
 
 
     def distance_from(self, other):
