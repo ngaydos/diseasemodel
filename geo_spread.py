@@ -10,6 +10,8 @@ class Grid:
         self.people = people
 
     def split_people(self):
+        '''splits people into two lists of infected and uninfected people objects
+        '''
         uninfected_people = []
         infected_people = []
         for person in self.people:
@@ -30,7 +32,9 @@ class Grid:
 
     def zombie_move(self):
         for person in self.people:
-
+            #should have the infected people move towards the closest uninfected, and should have the
+            #uninfected move away from the closest infected.
+            pass
 
     def simulate_random(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
         random.choice(self.people).infected = True
