@@ -39,31 +39,33 @@ class Grid:
             #should have the infected people move towards the closest uninfected, and should have the
             #uninfected move away from the closest infected.
             uninfected_people, infected_people = self.split_people()
-            for person in self.people:
                 #sets a dummy variable to be replaced
-                distance_check = self.xarea[1] + self.yarea[1]
-                if person.infected == True:
-                    for uninfected_person in uninfected_people:
-                        working_distance = person.distance_from(uninfected_person)
-                        if working_distance < distance_check:
-                            distance_check = working_distance
-                            if person.xloc - uninfected_person.xloc > 0:
-                                person.desired_xmove = 1
-                            elif person.xloc - uninfected_person.xloc < 0:
-                                person.desired_xmove = -1
-                            else:
-                                person.desired_xmove = 0
-                            if person.yloc - uninfected_person.yloc > 0:
-                                person.desired_ymove = 1
-                            elif person.yloc - uninfected_person.yloc < 0:
-                                person.desired_ymove = -1
-                            else:
-                                person.desired_ymove = 0
+            distance_check = self.xarea[1] + self.yarea[1]
+            if person.infected == True:
+                for uninfected_person in uninfected_people:
+                    working_distance = person.distance_from(uninfected_person)
+                    if working_distance < distance_check:
+                        distance_check = working_distance
+                        if person.xloc > uninfected_person.xloc:
+                            person.desired_xmove = -1
+                            print(person.desired_xmove)
+                        elif person.xloc < uninfected_person.xloc:
+                            person.desired_xmove = 1
+                        else:
+                            person.desired_xmove = 0
+                        if person.yloc > uninfected_person.yloc:
+                            person.desired_ymove = -1
+                        elif person.yloc < uninfected_person.yloc:
+                            person.desired_ymove = 1
+                        else:
+                            person.desired_ymove = 0
                 #need similar code here to make uninfected people run from zombies
             for person in self.people:
                 #coding this way will result in people getting trapped in corners because they refused to move towards zombies
                 xmove = person.desired_xmove
+                print(xmove)
                 ymove = person.desired_ymove
+                print(ymove)
                 if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
                     person.xloc += xmove
                 if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
@@ -81,7 +83,7 @@ class Grid:
                 else:
                     non_infected_people.append(person)
             for _ in range(movement_distance):
-                self.random_move()
+                self.zombie_move()
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
                     if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
@@ -97,7 +99,7 @@ class Grid:
         infected_y = []
         non_infected_x = []
         non_infected_y = []
-        for person in people:
+        for person in self.people:
             if person.infected == True:
                 infected_x.append(person.xloc)
                 infected_y.append(person.yloc)
