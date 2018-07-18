@@ -50,9 +50,12 @@ class Grid:
                 self.random_move()
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
-                    if infected_person.distance_from(non_infected_person) <= infection_range:
+                    if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
                         if random.randint(1, 100) <= infection_rate:
                             non_infected_person.infected = True
+                            non_infected_person.exposed = True
+                        else:
+                            non_infected_person.exposed = True
         return(sum(person.infected for person in self.people))
 
     def plot_all(self):
