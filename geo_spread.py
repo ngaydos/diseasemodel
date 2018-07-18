@@ -80,7 +80,7 @@ class Grid:
                 else:
                     non_infected_people.append(person)
             for _ in range(movement_distance):
-                self.zombie_move()
+                self.random_move()
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
                     if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
@@ -133,5 +133,5 @@ if __name__ == '__main__':
     for i in range(50):
         people.append(Person(random.randint(0, 20), random.randint(0, 20)))
     grid = Grid(20, 20, people)
-    print(grid.simulate_random(1, 3))
+    print(grid.simulate_random(1, 10))
     grid.plot_all()
