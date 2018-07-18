@@ -48,7 +48,6 @@ class Grid:
                         distance_check = working_distance
                         if person.xloc > uninfected_person.xloc:
                             person.desired_xmove = -1
-                            print(person.desired_xmove)
                         elif person.xloc < uninfected_person.xloc:
                             person.desired_xmove = 1
                         else:
@@ -60,16 +59,14 @@ class Grid:
                         else:
                             person.desired_ymove = 0
                 #need similar code here to make uninfected people run from zombies
-            for person in self.people:
-                #coding this way will result in people getting trapped in corners because they refused to move towards zombies
-                xmove = person.desired_xmove
-                print(xmove)
-                ymove = person.desired_ymove
-                print(ymove)
-                if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
-                    person.xloc += xmove
-                if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
-                    person.yloc += ymove
+        for person in self.people:
+            #coding this way will result in people getting trapped in corners because they refused to move towards zombies
+            xmove = person.desired_xmove
+            ymove = person.desired_ymove
+            if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
+                person.xloc += xmove
+            if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
+                person.yloc += ymove
 
 
     def simulate_random(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
