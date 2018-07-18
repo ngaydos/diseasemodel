@@ -81,7 +81,7 @@ class Grid:
                 else:
                     non_infected_people.append(person)
             for _ in range(movement_distance):
-                self.random_move()
+                self.zombie_move()
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
                     if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
