@@ -8,6 +8,10 @@ class Grid:
         self.xarea = [0, xsize]
         self.yarea = [0, ysize]
         self.people = people
+        #this is for storing where each person wants to move when moves are in relation to other people
+        self.desired_xmove = 0
+        self.desired_ymove = 0
+
 
     def split_people(self):
         '''splits people into two lists of infected and uninfected people objects
@@ -34,7 +38,37 @@ class Grid:
         for person in self.people:
             #should have the infected people move towards the closest uninfected, and should have the
             #uninfected move away from the closest infected.
-            pass
+            uninfected_people, infected_people = self.split_people()
+            for person in self.people:
+                #sets a dummy variable to be replaced
+                distance_check = self.xarea[1] + self.yarea[1]
+                if person.infected == True:
+                    for uninfected_person in uninfected_people:
+                        working_distance = person.distance_from(uninfected_person)
+                        if working_distance < distance_check:
+                            distance_check = working_distance
+                            if person.xloc - uninfected_person.xloc > 0:
+                                person.desired_xmove = 1
+                            elif person.xloc - uninfected_person.xloc < 0:
+                                person.desired_xmove = -1
+                            else:
+                                person.desired_xmove = 0
+                            if person.yloc - uninfected_person.yloc > 0:
+                                person.desired_ymove = 1
+                            elif person.yloc - uninfected_person.yloc < 0:
+                                person.desired_ymove = -1
+                            else:
+                                person.desired_ymove = 0
+                #need similar code here to make uninfected people run from zombies
+            for person in self.people:
+                #coding this way will result in people getting trapped in corners because they refused to move towards zombies
+                xmove = person.desired_xmove
+                ymove = person.desired_ymove
+                if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
+                    person.xloc += xmove
+                if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
+                    person.yloc += ymove
+
 
     def simulate_random(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
         random.choice(self.people).infected = True
