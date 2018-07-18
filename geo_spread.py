@@ -9,8 +9,7 @@ class Grid:
         self.yarea = [0, ysize]
         self.people = people
         #this is for storing where each person wants to move when moves are in relation to other people
-        self.desired_xmove = 0
-        self.desired_ymove = 0
+
 
 
     def split_people(self):
@@ -35,6 +34,7 @@ class Grid:
                 person.yloc += ymove
 
     def zombie_move(self):
+        #zombies are not currently running, not sure why not
         for person in self.people:
             #should have the infected people move towards the closest uninfected, and should have the
             #uninfected move away from the closest infected.
@@ -81,7 +81,7 @@ class Grid:
                 else:
                     non_infected_people.append(person)
             for _ in range(movement_distance):
-                self.zombie_move()
+                self.random_move()
             for infected_person in infected_people:
                 for non_infected_person in non_infected_people:
                     if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
@@ -116,6 +116,8 @@ class Person:
         self.yloc = yloc
         self.infected = infected
         self.exposed = exposed
+        self.desired_xmove = 0
+        self.desired_ymove = 0
 
 
     def distance_from(self, other):
@@ -132,5 +134,5 @@ if __name__ == '__main__':
     for i in range(50):
         people.append(Person(random.randint(0, 20), random.randint(0, 20)))
     grid = Grid(20, 20, people)
-    print(grid.simulate_random(1, 10))
+    print(grid.simulate_random(1, 3))
     grid.plot_all()
