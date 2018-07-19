@@ -38,8 +38,8 @@ class Grid:
         uninfected_people, infected_people = self.split_people()
 
         for person in self.people:
-            uninfected_people.shuffle()
-            infected_people.shuffle()
+            random.shuffle(uninfected_people)
+            random.shuffle(infected_people)
             #should have the infected people move towards the closest uninfected, and should have the
             #uninfected move away from the closest infected.
             
@@ -95,6 +95,28 @@ class Grid:
                             non_infected_person.exposed = True
         return(sum(person.infected for person in self.people))
 
+    def simulate_zombie(self, infection_range, generation_count, infection_rate = 100 ,movement_distance = 1):
+        random.choice(self.people).infected = True
+        for i in range(generation_count):
+            infected_people = []
+            non_infected_people = []
+            for person in self.people:
+                if person.infected == True:
+                    infected_people.append(person)
+                else:
+                    non_infected_people.append(person)
+            for _ in range(movement_distance):
+                self.zombie_move()
+            for infected_person in infected_people:
+                for non_infected_person in non_infected_people:
+                    if infected_person.distance_from(non_infected_person) <= infection_range and non_infected_person.exposed == False:
+                        if random.randint(1, 100) <= infection_rate:
+                            non_infected_person.infected = True
+                            non_infected_person.exposed = True
+                        else:
+                            non_infected_person.exposed = True
+        return(sum(person.infected for person in self.people))
+
     def plot_all(self):
         infected_x = []
         infected_y = []
@@ -137,5 +159,5 @@ if __name__ == '__main__':
     for i in range(50):
         people.append(Person(random.randint(0, 20), random.randint(0, 20)))
     grid = Grid(20, 20, people)
-    print(grid.simulate_random(1, 10))
+    print(grid.simulate_zombie(1, 10))
     grid.plot_all()
