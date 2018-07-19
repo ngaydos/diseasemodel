@@ -50,7 +50,24 @@ class Grid:
                             person.desired_ymove = 1
                         else:
                             person.desired_ymove = 0
-                #need similar code here to make uninfected people run from zombies
+            else:
+                for infected_person in infected_people:
+                    working_distance = person.distance_from(infected_person)
+                    if working_distance < working_distance:
+                        distance_check = working_distance
+                        if person.xloc < infected_person.xloc:
+                            person.desired_xmove = -1
+                        elif person.xloc > infected_person.xloc:
+                            person.desired_xmove = 1
+                        else:
+                            person.desired_xmove = 0
+                        if person.yloc < infected_person.yloc:
+                            person.desired_ymove = -1
+                        elif person.yloc > infected_person.yloc:
+                            person.desired_ymove = 1
+                        else:
+                            person.desired_ymove = 0
+
         for person in self.people:
             #coding this way will result in people getting trapped in corners because they refused to move towards zombies
             xmove = person.desired_xmove
@@ -81,6 +98,8 @@ class Grid:
                         else:
                             non_infected_person.exposed = True
         return(sum(person.infected for person in self.people))
+
+
 
     def plot_all(self):
         infected_x = []
