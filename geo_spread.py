@@ -36,12 +36,14 @@ class Grid:
     def zombie_move(self):
         #zombies are not currently running, not sure why not
         uninfected_people, infected_people = self.split_people()
-        
+
         for person in self.people:
+            uninfected_people.shuffle()
+            infected_people.shuffle()
             #should have the infected people move towards the closest uninfected, and should have the
             #uninfected move away from the closest infected.
             
-                #sets a dummy variable to be replaced
+            #sets a dummy variable to be replaced
             distance_check = self.xarea[1] + self.yarea[1]
             if person.infected == True:
                 for uninfected_person in uninfected_people:
