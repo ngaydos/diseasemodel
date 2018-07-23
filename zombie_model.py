@@ -100,6 +100,25 @@ class Grid:
         return(sum(person.infected for person in self.people))
 
 
+    def weighted_distance(self, person):
+        holding_dict = {}
+        distances = []
+        for other_person in people:
+            if person.infected != other_person.infected:
+                distance = person.distance_from(other_person)
+                distances.append(distance)
+                holding_dict[other_person] = distance
+        total_distance = sum(distances)
+        #this does the opposite of what I want it to.
+        #Probably want to do something to reverse the values
+        target_num = random.uniform(0, total_distance)
+        acc = 0
+        for val in distances:
+            acc += val
+            if acc <= target_num:
+                for key, value in holding_dict.items():
+                    if value == val:
+                        return key
 
     def plot_all(self):
         infected_x = []
