@@ -106,8 +106,8 @@ class Grid:
         for other_person in people:
             if person.infected != other_person.infected:
                 distance = person.distance_from(other_person)
-                distances.append(distance)
-                holding_dict[other_person] = distance
+                distances.append(1.0/distance)
+                holding_dict[other_person] = (1.0/distance)
         total_distance = sum(distances)
         #this does the opposite of what I want it to.
         #Probably want to do something to reverse the values
