@@ -106,11 +106,12 @@ class Grid:
         for other_person in people:
             if person.infected != other_person.infected:
                 distance = person.distance_from(other_person)
+                '''calculating the distances as 1/value means that the closest distances are the selected.
+                This system fails at 0, but given the parameters of what should be happening, that is generally ok
+                and in cases where this isnt ok, it can be compensated for in the particular code '''
                 distances.append(1.0/distance)
                 holding_dict[other_person] = (1.0/distance)
         total_distance = sum(distances)
-        #this does the opposite of what I want it to.
-        #Probably want to do something to reverse the values
         target_num = random.uniform(0, total_distance)
         acc = 0
         for val in distances:
