@@ -99,6 +99,56 @@ class Grid:
                             non_infected_person.exposed = True
         return(sum(person.infected for person in self.people))
 
+    def weighted_zombie(self, generation_count, infection_range = 1, movement_distance = 1):
+        #randomly infect an individual
+        random.choice(self.people).infected = True
+        #this loop handles the possibility that there are multiple people in the same location which would be a problem
+        for person in self.people:
+            if person.infected == True:
+                for other_person in self.people:
+                    if person.distance_from(other_person) == 0:
+                        other_person.infected = True
+        for i in range(generation_count):
+            for person in self.people:
+                target = self.weighted_distance(person)
+                if person.infected == True:
+                    if target.xloc > person.xloc:
+                        person.desired_xmove = 1
+                    elif target.xloc < person.xloc:
+                        person.desired_xmove = -1
+                    else:
+                        person.desired_xmove = 0
+                    if target.yloc > person.yloc:
+                        person.desired_ymove = 1
+                    elif target.yloc < person.yloc:
+                        person.desired_ymove = -1
+                    else:
+                        person.desired_ymove = 0
+                if person.infected == False:
+                    if target.xloc > person.xloc:
+                        person.desired_xmove = -1
+                    elif target.xloc < person.xloc:
+                        person.desired_xmove = 1
+                    else:
+                        person.desired_xmove = 0
+                    if target.yloc > person.yloc:
+                        person.desired_ymove = -1
+                    elif target.yloc < person.yloc:
+                        person.desired_ymove = 1
+                    else:
+                        person.desired_ymove = 0 
+   
+            for person in self.people:
+                #coding this way will result in people getting trapped in corners because they refused to move towards zombies
+                xmove = person.desired_xmove
+                ymove = person.desired_ymove
+                if person.xloc + xmove <= self.xarea[1] and person.xloc + xmove >= self.xarea[0]:
+                    person.xloc += xmove
+                if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
+                    person.yloc += ymove
+                
+
+
 
     def weighted_distance(self, person):
         holding_dict = {}
