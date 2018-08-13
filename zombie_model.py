@@ -146,6 +146,19 @@ class Grid:
                     person.xloc += xmove
                 if person.yloc + ymove <= self.yarea[1] and person.yloc + ymove >= self.yarea[0]:
                     person.yloc += ymove
+            infected_people = []
+            non_infected_people = []
+            for person in self.people:
+                if person.infected == True:
+                    infected_people.append(person)
+                else:
+                    non_infected_people.append(person)
+            for infected_person in infected_people:
+                for non_infected_person in non_infected_people:
+                    if infected_person.distance_from(non_infected_person) <= infection_range:
+                        non_infected_person.infected = True
+
+        return(sum(person.infected for person in self.people))
                 
 
 
